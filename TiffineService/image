@@ -1,0 +1,28 @@
+ <%
+            if (request.getMethod().equalsIgnoreCase("POST")) {
+                // get form data
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String message = request.getParameter("message");
+
+                // send email
+                String subject = "Tiffin Services Contact Form Submission";
+                String body = "Name: " + name + "\n"
+                            + "Email: " + email + "\n"
+                            + "Phone: " + phone + "\n"
+                            + "Message: " + message + "\n";
+                boolean sent = sendEmail("support@tiffinservices.com", subject, body);
+
+                // display confirmation message
+                if (sent) {
+        %>
+                    <p>Thank you for contacting us. We will get back to you soon.</p>
+        <%
+                } else {
+        %>
+                    <p>Sorry, there was an error submitting your message. Please try again later.</p>
+        <%
+                }
+            }
+        %>
